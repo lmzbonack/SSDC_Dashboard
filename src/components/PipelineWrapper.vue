@@ -99,8 +99,9 @@ export default {
 }
 
 #refreshButton {
-  background-color: #4ddbff; /* Green */
+  background-color: #4ddbff;
   border: none;
+  border-radius: 5px;
   color: black;
   padding: 10px 25px;
   text-align: center;

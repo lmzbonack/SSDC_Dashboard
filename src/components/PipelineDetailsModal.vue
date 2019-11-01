@@ -2,21 +2,27 @@
   <modal :name="'detail-modal' + pipelineName"
          @opened="opened"
          :scrollable="true"
-         height="auto">
-    <h2>{{ pipelineName.slice(0,-36) }}</h2>
-    <p>Input: {{ analyticsPayload.inputCounter }}</p>
-    <p>Output: {{ analyticsPayload.outputCounter }}</p>
-    <p>Error: {{ analyticsPayload.errorCounter }}</p>
-    <button id="hideButton"
-        type="buttton"
-        v-on:click="hide">
-        Close
-    </button>
+         height="auto"
+         width="60%"
+         :adaptive="true">
+    <div class="content-wrap">
+      <h2>{{ pipelineName.slice(0,-36) }}</h2>
+        <p>Last record recieved: {{ humanizeStreamSetsTime(analyticsPayload.lastRecordTime) }}</p>
+        <p><strong>Input:</strong> {{ analyticsPayload.inputCounter }}</p>
+        <p><strong>Output:</strong> {{ analyticsPayload.outputCounter }}</p>
+        <p><strong>Error:</strong> {{ analyticsPayload.errorCounter }}</p>
+      <button id="hideButton"
+              type="buttton"
+              v-on:click="hide">
+              Close
+      </button>
+    </div>
   </modal>
 </template>
 
 <script>
 import StreamSetsService from '../store/services/StreamSetsService'
+let moment = require('moment')
 
 export default {
   name: 'PipelineDetailsModal',
@@ -31,7 +37,8 @@ export default {
       analyticsPayload: {
         inputCounter: null,
         outputCounter: null,
-        errorCounter: null
+        errorCounter: null,
+        lastRecordTime: null
       }
     }
   },
@@ -39,11 +46,15 @@ export default {
     hide () {
       this.$modal.hide(`detail-modal${this.pipelineName}`)
     },
+    humanizeStreamSetsTime (val) {
+      return moment(val).format('dddd, MMMM Do YYYY, h:mm:ss a')
+    },
     opened (event) {
       StreamSetsService.fetchMetrics(this.pipelineName).then(response => {
         this.analyticsPayload.inputCounter = response.data.counters['pipeline.batchInputRecords.counter'].count
         this.analyticsPayload.outputCounter = response.data.counters['pipeline.batchOutputRecords.counter'].count
         this.analyticsPayload.errorCounter = response.data.counters['pipeline.batchErrorRecords.counter'].count
+        this.analyticsPayload.lastRecordTime = response.data.gauges['RuntimeStatsGauge.gauge'].value.timeOfLastReceivedRecord
       }).catch(function (error) {
         console.log(error)
       })
@@ -53,7 +64,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .v--modal-overlay[data-modal="detail-modal"] {
   background: transparent;
+}
+
+#hideButton {
+  background-color: #4ddbff;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.content-wrap{
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 </style>
