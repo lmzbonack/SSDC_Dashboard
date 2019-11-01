@@ -8,9 +8,9 @@
     <div class="content-wrap">
       <h2>{{ pipelineName.slice(0,-36) }}</h2>
         <p>Last record recieved: {{ humanizeStreamSetsTime(analyticsPayload.lastRecordTime) }}</p>
-        <p><strong>Input:</strong> {{ analyticsPayload.inputCounter }}</p>
-        <p><strong>Output:</strong> {{ analyticsPayload.outputCounter }}</p>
-        <p><strong>Error:</strong> {{ analyticsPayload.errorCounter }}</p>
+        <p><strong>Input: </strong> {{ analyticsPayload.inputCounter }}</p>
+        <p><strong>Output: </strong> {{ analyticsPayload.outputCounter }}</p>
+        <p><strong>Error: </strong> {{ analyticsPayload.errorCounter }}</p>
       <button id="hideButton"
               type="buttton"
               v-on:click="hide">

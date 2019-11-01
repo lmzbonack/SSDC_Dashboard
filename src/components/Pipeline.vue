@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
     <h3>{{ pipelineInstance.name.slice(0, -36) }}</h3>
-    <p>Status: {{ pipelineInstance.status }}</p>
+    <p><strong>Status: </strong>
+      <span class="default" :class="pipelineInstance.status === 'RUNNING' ? 'working' : 'broken'">{{ pipelineInstance.status }}</span>
+    </p>
     <button id="detailsButton"
             type="button"
             v-on:click="openDetailsModal">
@@ -45,4 +47,17 @@ export default {
   display: inline-block;
   font-size: 16px;
 }
+
+.default {
+  color: black
+}
+
+.working {
+  color: green
+}
+
+.broken {
+  color: red
+}
+
 </style>

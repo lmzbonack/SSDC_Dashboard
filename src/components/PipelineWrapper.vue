@@ -94,7 +94,7 @@ export default {
   color: black;
   border-radius: 5px;
   padding: 1em;
-  font-size: 125%;
+  font-size: 150%;
   overflow-wrap: break-word;
 }
 
