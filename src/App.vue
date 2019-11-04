@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vigil Logo" src="./assets/TrellisLogo2.png">
     <PipelineWrapper/>
   </div>
 </template>

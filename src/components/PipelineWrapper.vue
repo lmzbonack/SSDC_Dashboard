@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>How 'dem pipelines looking</h1>
+    <vue-up class="notification"></vue-up>
     <button id="refreshButton"
             type="button"
             v-on:click="fetchPipelineData(true)">
@@ -52,6 +53,9 @@ export default {
     window.setInterval(() => {
       this.fetchPipelineData(true)
     }, 500000)
+    window.setTimeout(() => {
+      this.notify()
+    }, 1000)
   },
   methods: {
     fetchPipelineData (reset) {
@@ -69,6 +73,18 @@ export default {
     },
     resetPipelineData () {
       this.pipelineData = []
+    },
+    notify () {
+      let brokenPipes = this.pipelineData.filter(pipe => pipe.status !== 'RUNNING')
+      if (brokenPipes) {
+        this.$popup({
+          message: `There are ${brokenPipes.length} pipelines not running`,
+          color: 'white',
+          backgroundColor: 'rgba(255, 102, 102, 0.8)',
+          delay: 2,
+          fontSize: 40
+        })
+      }
     }
   }
 }
@@ -109,6 +125,17 @@ export default {
   display: inline-block;
   font-size: 16px;
   margin-bottom: 10px;
+}
+
+// Modal things
+.notification {
+  width: 50%;
+  height: 30%;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto
 }
 
 </style>
