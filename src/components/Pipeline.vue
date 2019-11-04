@@ -4,6 +4,7 @@
     <p><strong>Status: </strong>
       <span class="default" :class="pipelineInstance.status === 'RUNNING' ? 'working' : 'broken'">{{ pipelineInstance.status }}</span>
     </p>
+    <p><strong>Last Started: </strong> {{ humanizeUptime(pipelineInstance.timeStamp) }} </p>
     <button id="detailsButton"
             type="button"
             v-on:click="openDetailsModal">
@@ -15,6 +16,7 @@
 
 <script>
 import PipelineDetailsModal from './PipelineDetailsModal.vue'
+let moment = require('moment')
 
 export default {
   name: 'Pipeline',
@@ -30,6 +32,9 @@ export default {
   methods: {
     openDetailsModal () {
       this.$modal.show(`detail-modal${this.pipelineInstance.name}`)
+    },
+    humanizeUptime (val) {
+      return moment(val).startOf('minute').fromNow()
     }
   }
 }
