@@ -76,7 +76,7 @@ export default {
     },
     notify () {
       let brokenPipes = this.pipelineData.filter(pipe => pipe.status !== 'RUNNING')
-      if (brokenPipes) {
+      if (brokenPipes > 0) {
         this.$popup({
           message: `There are ${brokenPipes.length} pipelines not running`,
           color: 'white',

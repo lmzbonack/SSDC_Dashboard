@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <h3>{{ pipelineInstance.name.slice(0, -36) }}</h3>
+    <h3><a :href=buildPipelineURL() target="_blank">{{ pipelineInstance.name.slice(0, -36) }}</a></h3>
+    <!-- <h3>{{ pipelineInstance.name.slice(0, -36) }}</h3> -->
     <p><strong>Status: </strong>
       <span class="default" :class="pipelineInstance.status === 'RUNNING' ? 'working' : 'broken'">{{ pipelineInstance.status }}</span>
     </p>
@@ -35,6 +36,9 @@ export default {
     },
     humanizeUptime (val) {
       return moment(val).startOf('minute').fromNow()
+    },
+    buildPipelineURL () {
+      return `${process.env.VUE_APP_STREAMSETS_SERVER}/collector/pipeline/${this.pipelineInstance.pipelineId}`
     }
   }
 }
