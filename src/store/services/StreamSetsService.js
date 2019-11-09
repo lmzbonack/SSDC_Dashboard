@@ -13,7 +13,20 @@ export default {
       }
     })
   },
-
+  stopAll () {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/stop-oribus`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
+  },
+  startAll () {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/start-oribus`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
+  },
   fetchMetrics (pipeline) {
     return axios.get(`${process.env.VUE_APP_STREAMSETS_SERVER}/rest/v1/pipeline/${pipeline}/metrics`, {
       auth: {

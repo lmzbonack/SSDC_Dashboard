@@ -46,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 #detailsButton {
-  background-color: #4ddbff;
+  background-color: rgba(0, 125, 132, 0.4);
   border: none;
   border-radius: 5px;
   color: black;

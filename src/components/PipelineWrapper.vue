@@ -1,7 +1,16 @@
 <template>
   <div class="wrapper">
-    <h1>How 'dem pipelines looking</h1>
     <vue-up class="notification"></vue-up>
+    <button id="startButton"
+            type="button"
+            v-on:click="startAll()">
+            Start
+    </button>
+    <button id="stopButton"
+            type="button"
+            v-on:click="stopAll()">
+            Stop
+    </button>
     <button id="refreshButton"
             type="button"
             v-on:click="fetchPipelineData(true)">
@@ -74,11 +83,21 @@ export default {
     resetPipelineData () {
       this.pipelineData = []
     },
+    stopAll () {
+      StreamSetsService.stopAll().then(response => {
+        console.log(response)
+      })
+    },
+    startAll () {
+      StreamSetsService.startAll().then(response => {
+        console.log(response)
+      })
+    },
     notify () {
       let brokenPipes = this.pipelineData.filter(pipe => pipe.status !== 'RUNNING')
-      if (brokenPipes > 0) {
+      if (brokenPipes.length > 0) {
         this.$popup({
-          message: `There are ${brokenPipes.length} pipelines not running`,
+          message: `There are ${brokenPipes.length} pipeline(s)  not running`,
           color: 'white',
           backgroundColor: 'rgba(255, 102, 102, 0.8)',
           delay: 2,
@@ -91,6 +110,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+button {
+    margin: 1em;
+}
 
 .wrapper {
   width: 70%;
@@ -115,10 +138,36 @@ export default {
 }
 
 #refreshButton {
-  background-color: #4ddbff;
+  background-color: rgba(0, 125, 132, 0.4);
   border: none;
   border-radius: 5px;
   color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#startButton {
+  background-color: rgba(87, 230, 21, 0.926);
+  border: none;
+  border-radius: 5px;
+  color: black;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#stopButton {
+  background-color: rgba(240, 21, 13, 0.801);
+  border: none;
+  border-radius: 5px;
+  color: white;
   padding: 10px 25px;
   text-align: center;
   text-decoration: none;
