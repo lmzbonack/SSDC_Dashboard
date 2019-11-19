@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import PipelineDetailsModal from './PipelineDetailsModal.vue'
+import PipelineDetailsModal from './PipelineDetailsModal'
 let moment = require('moment')
 
 export default {

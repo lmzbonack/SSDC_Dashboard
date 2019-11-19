@@ -26,7 +26,7 @@
 
 <script>
 import StreamSetsService from '../store/services/StreamSetsService'
-import Pipeline from './Pipeline.vue'
+import Pipeline from '../components/Pipeline.vue'
 
 export default {
   name: 'PipelineWrapper',
@@ -129,7 +129,7 @@ button {
 }
 
 .card {
-  background-color: lightgrey;
+  background-color: #eee;
   color: black;
   border-radius: 5px;
   padding: 1em;
