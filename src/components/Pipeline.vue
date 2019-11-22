@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
     <h3><a :href=buildPipelineURL() target="_blank">{{ pipelineInstance.name.slice(0, -36) }}</a></h3>
-    <!-- <h3>{{ pipelineInstance.name.slice(0, -36) }}</h3> -->
     <p><strong>Status: </strong>
       <span class="default" :class="pipelineInstance.status === 'RUNNING' ? 'working' : 'broken'">{{ pipelineInstance.status }}</span>
     </p>
@@ -55,6 +54,7 @@ export default {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  line-height: 1.5em;
 }
 
 .default {
@@ -67,6 +67,11 @@ export default {
 
 .broken {
   color: red
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.5em;
 }
 
 </style>

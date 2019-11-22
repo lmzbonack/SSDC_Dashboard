@@ -13,6 +13,28 @@ export default {
       }
     })
   },
+  fetchMetrics (pipeline) {
+    return axios.get(`${process.env.VUE_APP_STREAMSETS_SERVER}/rest/v1/pipeline/${pipeline}/metrics`, {
+      auth: {
+        username: process.env.VUE_APP_STREAMSETS_USERNAME,
+        password: process.env.VUE_APP_STREAMSETS_PASSWORD
+      }
+    })
+  },
+  fetchErrors (page) {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/error-logs?page=${page}`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
+  },
+  fetchTelemetry (page) {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/telemetry?page=${page}`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
+  },
   stopAll () {
     return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/stop-oribus`, {
       headers: {
@@ -27,13 +49,11 @@ export default {
       }
     })
   },
-  fetchMetrics (pipeline) {
-    return axios.get(`${process.env.VUE_APP_STREAMSETS_SERVER}/rest/v1/pipeline/${pipeline}/metrics`, {
-      auth: {
-        username: process.env.VUE_APP_STREAMSETS_USERNAME,
-        password: process.env.VUE_APP_STREAMSETS_PASSWORD
+  fetchQueueCounts () {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/change-count`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
       }
     })
   }
-
 }

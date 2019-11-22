@@ -44,6 +44,8 @@ export default {
   },
   methods: {
     vnbItemClicked (text) {
+      // This may actually be useful for something in the future
+      // Leaving it for now
       console.log(text)
     }
   }
@@ -76,7 +78,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
 img {

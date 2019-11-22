@@ -133,7 +133,8 @@ button {
   color: black;
   border-radius: 5px;
   padding: 1em;
-  font-size: 150%;
+  font-size: 16px;
+  line-height: 1.5em;
   overflow-wrap: break-word;
 }
 
@@ -147,6 +148,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  line-height: 1.5em;
   margin-bottom: 10px;
 }
 
@@ -160,6 +162,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  line-height: 1.5em;
   margin-bottom: 10px;
 }
 
@@ -173,6 +176,7 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  line-height: 1.5em;
   margin-bottom: 10px;
 }
 
