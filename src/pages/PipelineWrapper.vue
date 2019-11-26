@@ -85,12 +85,12 @@ export default {
     },
     stopAll () {
       StreamSetsService.stopAll().then(response => {
-        console.log(response)
+        this.fetchPipelineData(true)
       })
     },
     startAll () {
       StreamSetsService.startAll().then(response => {
-        console.log(response)
+        this.fetchPipelineData(true)
       })
     },
     notify () {

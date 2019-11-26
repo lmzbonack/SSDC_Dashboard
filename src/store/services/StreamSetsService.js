@@ -55,5 +55,19 @@ export default {
         'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
       }
     })
+  },
+  startPipeline (pipeline) {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/start-pipeline?pipeline=${pipeline}`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
+  },
+  stopPipeline (pipeline) {
+    return axios.get(`${process.env.VUE_APP_LAMBDA_URL}/stop-pipeline?pipeline=${pipeline}`, {
+      headers: {
+        'x-api-key': process.env.VUE_APP_LAMBDA_API_KEY
+      }
+    })
   }
 }

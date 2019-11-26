@@ -102,7 +102,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-    width: 80%;
+    width: 90%;
 }
 
 #fetchMoreButton {
