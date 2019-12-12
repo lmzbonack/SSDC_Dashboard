@@ -22,10 +22,15 @@
                 perPage: 50,
             }">
             <div slot="table-actions">
-                    <button id="fetchMoreButton"
+                    <button class="table-button"
                             type="button"
                             v-on:click="getErrors(paginationCounter)">
                             Load More
+                    </button>
+                    <button class="table-button"
+                            type="button"
+                            v-on:click="refresh">
+                            Refresh
                     </button>
                 <span id="count"> {{ fetchedErrorsLength }} records</span>
             </div>
@@ -86,6 +91,11 @@ export default {
       }).catch(function (error) {
         console.log(error)
       })
+    },
+    refresh () {
+      this.rows = []
+      this.paginationCounter = 1
+      this.getErrors(this.paginationCounter)
     }
   },
   computed: {
@@ -102,7 +112,7 @@ export default {
     width: 90%;
 }
 
-#fetchMoreButton {
+.table-button {
   background-color :rgba(0, 125, 132, 0.4);;
   border: none;
   border-radius: 5px;
@@ -111,9 +121,10 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5em;
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 #count {
