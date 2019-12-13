@@ -11,7 +11,7 @@
             v-on:click="startPipeline(pipelineInstance.name)">
             Start
     </button>
-    <button v-if="pipelineInstance.status != 'STOPPED'"
+    <button v-if="pipelineInstance.status == 'RUNNING'"
             id="stopButton"
             type="button"
             v-on:click="stopPipeline(pipelineInstance.name)">

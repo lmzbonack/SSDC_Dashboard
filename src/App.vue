@@ -9,12 +9,16 @@
             </vue-navigation-bar>
         </div>
     </section>
+    <span>Change Queue Count: {{ queueCounts.changeQueue }}</span>
     <img alt="Vigil Logo" src="./assets/TrellisLogo2.png">
+    <span>Job Queue Count: {{ queueCounts.jobQueue }}</span>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import StreamSetsService from './store/services/StreamSetsService'
+
 export default {
   name: 'app',
   data () {
@@ -39,14 +43,30 @@ export default {
             path: 'telemetry'
           }
         ]
+      },
+      queueCounts: {
+        changeQueue: null,
+        jobQueue: null
       }
     }
+  },
+  mounted () {
+    this.populateQueueCounts()
+    window.setInterval(() => {
+      this.populateQueueCounts()
+    }, 500000)
   },
   methods: {
     vnbItemClicked (text) {
       // This may actually be useful for something in the future
       // Leaving it for now
       console.log(text)
+    },
+    populateQueueCounts () {
+      StreamSetsService.fetchQueueCounts().then(response => {
+        this.queueCounts.changeQueue = response.data.counts.change_queue['COUNT(*)']
+        this.queueCounts.jobQueue = response.data.counts.job_queue['COUNT(*)']
+      })
     }
   }
 }
