@@ -88,7 +88,7 @@ export default {
     getTelemetry (page) {
       StreamSetsService.fetchTelemetry(page).then(response => {
         this.paginationCounter = this.paginationCounter + 1
-        const arrConvert = JSON.parse(response.data)
+        const arrConvert = JSON.parse(response.data.body)
         arrConvert.forEach(item => {
           this.rows.push(item)
         })
