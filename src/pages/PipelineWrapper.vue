@@ -25,8 +25,10 @@
 </template>
 
 <script>
+import axios from 'axios'
 import StreamSetsService from '../store/services/StreamSetsService'
 import Pipeline from '../components/Pipeline.vue'
+import router from '../router'
 
 export default {
   name: 'PipelineWrapper',
@@ -58,6 +60,7 @@ export default {
     }
   },
   mounted () {
+    this.getUserData()
     this.fetchPipelineData(false)
     window.setInterval(() => {
       this.fetchPipelineData(true)
@@ -104,6 +107,18 @@ export default {
           fontSize: 40
         })
       }
+    },
+    getUserData: function () {
+      let self = this
+      axios.get('/api/user')
+        .then((response) => {
+          console.log(response)
+          self.$set(this, 'user', response.data.user)
+        })
+        .catch((errors) => {
+          console.log(errors)
+          router.push('/')
+        })
     }
   }
 }

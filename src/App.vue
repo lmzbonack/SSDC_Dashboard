@@ -30,7 +30,7 @@ export default {
           {
             type: 'link',
             text: 'Home',
-            path: '/'
+            path: '/pipelines'
           },
           {
             type: 'link',
